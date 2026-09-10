@@ -1,0 +1,203 @@
+/* ==========================================================================
+   BASE — reset, variáveis de tema e tipografia
+   Para trocar a identidade do cliente, mexa só em --cor-marca e
+   --cor-destaque (ou nas cores do objeto `marca` em dados.js).
+   ========================================================================== */
+
+:root {
+  /* Paleta bruta ------------------------------------------------------- */
+  --breu: #0b0b0c;
+  --concreto: #141518;
+  --fumaca: #1d1f23;
+  --linha: #303339;
+  --calcario: #e9e5de;
+  --suor: #8d919a;
+
+  /* Cores da marca — sobrescritas por dados.js em tempo de execução */
+  --cor-marca: #c98b3c;
+  --cor-destaque: #e4a94f;
+
+  /* Papéis semânticos -------------------------------------------------- */
+  --cor-fundo: var(--breu);
+  --cor-superficie: var(--concreto);
+  --cor-superficie-alta: var(--fumaca);
+  --cor-linha: var(--linha);
+  --cor-texto: var(--calcario);
+  --cor-texto-suave: var(--suor);
+  --cor-sombra-imagem: rgba(8, 8, 9, 0.72);
+
+  /* Escala de movimento (mapa de lotação) ------------------------------
+     A luminosidade cresce junto com a lotação, para a leitura funcionar
+     mesmo para quem não distingue as cores. */
+  --mov-fechado: #0e0f11;
+  --mov-0: #2d323b;
+  --mov-1: #5f5134;
+  --mov-2: #9c722c;
+  --mov-3: var(--cor-destaque);
+
+  /* Tipografia --------------------------------------------------------- */
+  --fonte-display: 'Big Shoulders Display', 'Arial Narrow', system-ui, sans-serif;
+  --fonte-texto: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --fonte-dados: 'DM Mono', ui-monospace, 'Consolas', monospace;
+
+  --t-display: clamp(3.5rem, 12vw, 10rem);
+  --t-titulo: clamp(2.4rem, 6vw, 4.5rem);
+  --t-subtitulo: clamp(1.25rem, 2.4vw, 1.75rem);
+  --t-corpo: clamp(1rem, 1.05vw, 1.0625rem);
+  --t-miudo: 0.8125rem;
+
+  /* Espaçamento e formas ----------------------------------------------- */
+  --e-1: 0.5rem;
+  --e-2: 1rem;
+  --e-3: 1.5rem;
+  --e-4: 2.5rem;
+  --e-5: 4rem;
+  --e-6: 6rem;
+  --e-secao: clamp(4.5rem, 9vw, 8rem);
+
+  --raio: 2px;
+  --largura-max: 1240px;
+}
+
+/* Períodos do dia — só o fundo e o destaque mudam ------------------------ */
+:root[data-periodo='manha'] {
+  --cor-fundo: #101216;
+  --cor-superficie: #171a1f;
+  --cor-superficie-alta: #1f232a;
+  --cor-sombra-imagem: rgba(10, 13, 18, 0.6);
+}
+
+:root[data-periodo='tarde'] {
+  --cor-fundo: #100e0c;
+  --cor-superficie: #171512;
+  --cor-superficie-alta: #201d18;
+  --cor-sombra-imagem: rgba(14, 11, 8, 0.66);
+}
+
+:root[data-periodo='noite'] {
+  --cor-fundo: var(--breu);
+  --cor-superficie: var(--concreto);
+  --cor-superficie-alta: var(--fumaca);
+  --cor-sombra-imagem: rgba(6, 6, 7, 0.78);
+}
+
+/* Reset ------------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* compensa o cabeçalho fixo ao pular por âncora */
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: var(--fonte-texto);
+  font-size: var(--t-corpo);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img,
+iframe {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Tipografia ------------------------------------------------------------- */
+h1,
+h2,
+h3 {
+  font-family: var(--fonte-display);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+
+.olho {
+  font-family: var(--fonte-dados);
+  font-size: var(--t-miudo);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cor-destaque);
+}
+
+.aviso {
+  border-left: 2px solid var(--cor-marca);
+  padding-left: var(--e-2);
+  color: var(--cor-texto-suave);
+  max-width: 52ch;
+}
+
+.aviso a {
+  color: var(--cor-destaque);
+}
+
+/* Acessibilidade --------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--cor-destaque);
+  outline-offset: 3px;
+}
+
+.pular-para {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  z-index: 100;
+  background: var(--cor-destaque);
+  color: var(--breu);
+  padding: var(--e-2) var(--e-3);
+  font-weight: 600;
+}
+
+.pular-para:focus {
+  left: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

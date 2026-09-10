@@ -230,8 +230,17 @@ navegável por teclado, com foco visível e mudança de passo anunciada.
 `prefers-reduced-motion` desliga as transições de rolagem e do quiz.
 Estados de lotação com rótulo textual além da cor.
 
-Sem JavaScript, a página ainda mostra o essencial: identidade, planos,
-aulas, endereço e WhatsApp. Quiz, heatmap e hero vivo ficam ocultos por
+Sem JavaScript, a página mostra a identidade, os títulos das seções, um
+aviso por seção explicando o que não carregou, e um bloco de contato
+completo no rodapé — endereço, telefone, e-mail, horários e WhatsApp.
+
+Manter também planos e aulas sem JavaScript exigiria repetir esses dados
+no HTML, o que quebraria a fonte única em `dados.js` — o argumento de
+venda do template. A escolha é a fonte única; o bloco `<noscript>` do
+rodapé é o único conteúdo escrito direto no HTML, e está comentado como
+tal.
+
+Quiz, heatmap, grade de aulas, planos e depoimentos ficam ocultos por
 padrão e são revelados pelos módulos ao iniciarem.
 
 ## Verificação
@@ -245,5 +254,5 @@ navegador:
 4. Forçar manhã, tarde e noite muda tema e saudação, e a próxima aula exibida bate com a grade.
 5. Layout íntegro a 375px, 768px e 1440px de largura.
 6. Console sem erros e sem requisições quebradas.
-7. Com JavaScript desativado, planos, aulas, endereço e WhatsApp continuam visíveis.
+7. Com JavaScript desativado, o bloco de contato do rodapé (endereço, telefone, horários e WhatsApp) continua visível, e cada seção interativa explica o que não carregou.
 8. Trocar `nome`, `whatsapp` e as duas cores de marca em `dados.js` muda a página inteira, sem editar HTML ou CSS.

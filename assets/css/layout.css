@@ -1,0 +1,296 @@
+/* ==========================================================================
+   LAYOUT — cabeçalho, containers de seção, botões, rodapé
+   ========================================================================== */
+
+/* Cabeçalho -------------------------------------------------------------- */
+.cabecalho {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: color-mix(in srgb, var(--cor-fundo) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--cor-linha);
+}
+
+.cabecalho__interno {
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding: 0.75rem clamp(1rem, 4vw, 2.5rem);
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+}
+
+.marca {
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.marca__nome {
+  font-family: var(--fonte-display);
+  font-weight: 800;
+  font-size: 1.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.navegacao {
+  display: none;
+  gap: clamp(0.75rem, 2vw, 1.75rem);
+}
+
+.navegacao a {
+  font-size: var(--t-miudo);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--cor-texto-suave);
+  padding-block: 0.25rem;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.navegacao a:hover {
+  color: var(--cor-texto);
+  border-bottom-color: var(--cor-marca);
+}
+
+@media (min-width: 900px) {
+  .navegacao {
+    display: flex;
+  }
+}
+
+/* Botões ----------------------------------------------------------------- */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: var(--raio);
+  font-family: var(--fonte-texto);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.botao--destaque {
+  background: var(--cor-destaque);
+  color: var(--breu);
+}
+
+.botao--destaque:hover {
+  background: var(--cor-texto);
+}
+
+.botao--vazado {
+  border-color: var(--cor-linha);
+  color: var(--cor-texto);
+}
+
+.botao--vazado:hover {
+  border-color: var(--cor-destaque);
+  color: var(--cor-destaque);
+}
+
+.botao--pequeno {
+  padding: 0.55rem 1rem;
+  font-size: var(--t-miudo);
+  border-color: var(--cor-linha);
+}
+
+.botao--pequeno:hover {
+  border-color: var(--cor-destaque);
+  color: var(--cor-destaque);
+}
+
+/* Seções ----------------------------------------------------------------- */
+.secao {
+  position: relative;
+  padding-block: var(--e-secao);
+}
+
+.secao__interno {
+  position: relative;
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+}
+
+.secao__cabecalho {
+  max-width: 46ch;
+  margin-bottom: var(--e-4);
+}
+
+.secao__titulo {
+  font-size: var(--t-titulo);
+  margin-block: 0.5rem 0.75rem;
+}
+
+.secao__linha-fina {
+  color: var(--cor-texto-suave);
+  max-width: 52ch;
+}
+
+/* Fundo com imagem: o texto nunca encosta no pixel ----------------------- */
+.secao__fundo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.secao__fundo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--cor-fundo) 0%,
+    var(--cor-sombra-imagem) 30%,
+    var(--cor-sombra-imagem) 70%,
+    var(--cor-fundo) 100%
+  );
+}
+
+/* Rodapé ----------------------------------------------------------------- */
+.rodape {
+  border-top: 1px solid var(--cor-linha);
+  padding-block: var(--e-5) var(--e-3);
+  background: var(--cor-superficie);
+}
+
+.rodape__interno {
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+  display: grid;
+  gap: var(--e-4);
+}
+
+@media (min-width: 800px) {
+  .rodape__interno {
+    grid-template-columns: 1.1fr 1fr 1.2fr;
+    gap: var(--e-5);
+  }
+}
+
+.rodape__marca {
+  font-family: var(--fonte-display);
+  font-weight: 800;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: var(--e-2);
+}
+
+.rodape__titulo {
+  font-size: 1.25rem;
+  margin-bottom: var(--e-2);
+}
+
+.rodape__bloco p {
+  color: var(--cor-texto-suave);
+  margin-bottom: 0.35rem;
+}
+
+.rodape__bloco a {
+  color: var(--cor-texto-suave);
+  text-decoration-color: var(--cor-linha);
+  text-underline-offset: 3px;
+}
+
+.rodape__bloco a:hover {
+  color: var(--cor-destaque);
+}
+
+.rodape__horarios li {
+  font-family: var(--fonte-dados);
+  font-size: 0.875rem;
+  color: var(--cor-texto-suave);
+  padding-block: 0.3rem;
+  border-bottom: 1px solid var(--cor-linha);
+}
+
+/* Especificidade acima de `.rodape__bloco a`, senão o botão perde a cor. */
+.rodape__bloco a.rodape__botao {
+  margin-top: var(--e-3);
+  color: var(--breu);
+}
+
+.rodape__bloco a.rodape__botao:hover {
+  color: var(--breu);
+}
+
+.rodape__bloco--mapa iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  border: 1px solid var(--cor-linha);
+  filter: grayscale(1) contrast(1.1) brightness(0.75);
+}
+
+.rodape__sem-js {
+  max-width: var(--largura-max);
+  margin: 0 auto var(--e-4);
+  padding: var(--e-3) clamp(1rem, 4vw, 2.5rem);
+  border-left: 2px solid var(--cor-marca);
+}
+
+.rodape__sem-js p {
+  color: var(--cor-texto-suave);
+  margin-bottom: 0.35rem;
+}
+
+.rodape__sem-js a {
+  color: var(--cor-destaque);
+}
+
+.rodape__creditos {
+  max-width: var(--largura-max);
+  margin: var(--e-5) auto 0;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+  font-size: var(--t-miudo);
+  color: var(--cor-texto-suave);
+  border-top: 1px solid var(--cor-linha);
+  padding-top: var(--e-2);
+}
+
+/* WhatsApp flutuante ----------------------------------------------------- */
+.zap-flutuante {
+  position: fixed;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  z-index: 45;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.1rem;
+  background: var(--cor-destaque);
+  color: var(--breu);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  transition: transform 0.2s;
+}
+
+.zap-flutuante:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 560px) {
+  .zap-flutuante span {
+    display: none;
+  }
+
+  .zap-flutuante {
+    padding: 0.85rem;
+  }
+}

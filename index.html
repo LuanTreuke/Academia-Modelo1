@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forja — Academia</title>
+<meta name="description" content="Academia com musculação, aulas coletivas e studio. Descubra seu plano e o melhor horário para treinar.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0b0c'/%3E%3Crect x='5' y='13' width='22' height='6' fill='%23e4a94f'/%3E%3Crect x='3' y='9' width='4' height='14' fill='%23e4a94f'/%3E%3Crect x='25' y='9' width='4' height='14' fill='%23e4a94f'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Archivo:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/secoes.css">
+</head>
+<body>
+
+<a class="pular-para" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="cabecalho">
+  <div class="cabecalho__interno">
+    <a class="marca" href="#inicio">
+      <span class="marca__nome" data-campo="nome">Forja</span>
+    </a>
+    <nav class="navegacao" aria-label="Seções do site">
+      <a href="#quiz">Seu plano</a>
+      <a href="#lotacao">Horários</a>
+      <a href="#aulas">Aulas</a>
+      <a href="#estrutura">Estrutura</a>
+      <a href="#planos">Planos</a>
+    </nav>
+    <a class="botao botao--pequeno" data-zap-simples href="#contato">Falar com a gente</a>
+  </div>
+</header>
+
+<main id="conteudo">
+
+  <!-- 1. HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero__fundo" aria-hidden="true"></div>
+    <div class="hero__interno">
+      <div class="hero__texto">
+        <p class="olho" data-saudacao>Academia</p>
+        <h1 class="hero__titulo" data-campo="nome">Forja</h1>
+        <p class="hero__slogan" data-campo="slogan">Disciplina é o que te leva mais longe.</p>
+        <div class="hero__acoes">
+          <a class="botao botao--destaque" href="#quiz">Montar meu plano</a>
+          <a class="botao botao--vazado" data-zap-simples href="#contato">Falar no WhatsApp</a>
+        </div>
+      </div>
+
+      <aside class="painel" data-painel hidden aria-live="polite">
+        <p class="painel__titulo">Agora na academia</p>
+        <dl class="painel__linhas">
+          <div class="painel__linha">
+            <dt>Hora</dt>
+            <dd data-painel-hora>--:--</dd>
+          </div>
+          <div class="painel__linha">
+            <dt>Próxima aula</dt>
+            <dd data-painel-aula>—</dd>
+          </div>
+          <div class="painel__linha painel__linha--movimento">
+            <dt>Movimento</dt>
+            <dd>
+              <span data-painel-movimento>—</span>
+              <span class="medidor" data-painel-medidor aria-hidden="true"></span>
+            </dd>
+          </div>
+        </dl>
+        <p class="painel__rodape" data-painel-funcionamento></p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 2. QUIZ -->
+  <section class="secao secao--quiz" id="quiz">
+    <div class="secao__interno">
+      <header class="secao__cabecalho">
+        <p class="olho">Sem tabela de preço decorada</p>
+        <h2 class="secao__titulo">Monte seu plano em 60&nbsp;segundos</h2>
+        <p class="secao__linha-fina">Quatro perguntas. No fim você sabe qual plano faz sentido para você e por quê.</p>
+      </header>
+
+      <div class="quiz" data-quiz hidden></div>
+
+      <noscript>
+        <p class="aviso">O montador de plano precisa de JavaScript. Se preferir, veja a tabela completa em
+          <a href="#planos">Planos</a> ou fale com a recepção.</p>
+      </noscript>
+    </div>
+  </section>
+
+  <!-- 3. LOTAÇÃO -->
+  <section class="secao secao--lotacao" id="lotacao">
+    <div class="secao__interno">
+      <header class="secao__cabecalho">
+        <p class="olho">A pergunta que ninguém responde</p>
+        <h2 class="secao__titulo">Vai estar cheio no seu horário?</h2>
+        <p class="secao__linha-fina">Movimento médio por faixa de horário, de acordo com os check-ins da recepção.</p>
+      </header>
+
+      <div class="lotacao" data-lotacao hidden></div>
+
+      <noscript>
+        <p class="aviso">O mapa de horários precisa de JavaScript. Nossos horários de funcionamento estão
+          no <a href="#contato">rodapé</a>.</p>
+      </noscript>
+    </div>
+  </section>
+
+  <!-- 4. AULAS -->
+  <section class="secao secao--aulas" id="aulas">
+    <div class="secao__interno">
+      <header class="secao__cabecalho">
+        <p class="olho">Grade da semana</p>
+        <h2 class="secao__titulo">Aulas coletivas</h2>
+        <p class="secao__linha-fina">Todas inclusas a partir do plano Plus. Chegue 5 minutos antes.</p>
+      </header>
+
+      <div class="aulas" data-aulas hidden></div>
+
+      <noscript>
+        <p class="aviso">A grade de aulas precisa de JavaScript. Os horários e o telefone da
+          recepção estão em <a href="#contato">Contato</a>.</p>
+      </noscript>
+    </div>
+  </section>
+
+  <!-- 5. ESTRUTURA -->
+  <section class="secao secao--estrutura" id="estrutura">
+    <div class="secao__interno">
+      <header class="secao__cabecalho">
+        <p class="olho">Antes de vir conhecer</p>
+        <h2 class="secao__titulo">Por dentro</h2>
+        <p class="secao__linha-fina secao__linha-fina--dica">Arraste para o lado para percorrer as áreas.</p>
+      </header>
+    </div>
+    <div class="tour" data-tour tabindex="0" role="region" aria-label="Áreas da academia"></div>
+  </section>
+
+  <!-- 6. PLANOS -->
+  <section class="secao secao--planos" id="planos">
+    <div class="secao__fundo" aria-hidden="true"></div>
+    <div class="secao__interno">
+      <header class="secao__cabecalho">
+        <p class="olho">Tudo, sem letra miúda</p>
+        <h2 class="secao__titulo">Planos</h2>
+        <p class="secao__linha-fina">Mensal, sem fidelidade. Cancelamento pela recepção ou pelo aplicativo.</p>
+      </header>
+
+      <div class="planos" data-planos hidden></div>
+
+      <noscript>
+        <p class="aviso">A tabela de planos precisa de JavaScript. Fale com a recepção pelos
+          contatos em <a href="#contato">Contato</a> para os valores atualizados.</p>
+      </noscript>
+    </div>
+  </section>
+
+  <!-- 7. PROVA SOCIAL -->
+  <section class="secao secao--depoimentos" id="alunos">
+    <div class="secao__interno">
+      <header class="secao__cabecalho">
+        <p class="olho">Quem treina aqui</p>
+        <h2 class="secao__titulo">Três histórias</h2>
+      </header>
+      <div class="depoimentos" data-depoimentos hidden></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 8. RODAPÉ -->
+<footer class="rodape" id="contato">
+  <!-- Único conteúdo fora de dados.js: o que aparece se o JavaScript
+       estiver desligado. Mantenha em dia junto com dados.js. -->
+  <noscript>
+    <div class="rodape__sem-js">
+      <h2 class="rodape__titulo">Contato</h2>
+      <p>Rua das Oficinas, 480 — Vila Industrial, São Paulo</p>
+      <p><a href="tel:+551133334444">(11) 3333-4444</a></p>
+      <p><a href="mailto:contato@academiaforja.com.br">contato@academiaforja.com.br</a></p>
+      <p>Segunda a sexta, 5h às 23h · Sábado, 8h às 17h · Domingo, 9h às 13h</p>
+      <p><a href="https://wa.me/5511999999999">Falar no WhatsApp</a></p>
+    </div>
+  </noscript>
+
+  <div class="rodape__interno">
+    <div class="rodape__bloco">
+      <p class="rodape__marca" data-campo="nome">Forja</p>
+      <p class="rodape__endereco" data-campo="endereco"></p>
+      <p><a data-campo="telefone-link" href="#"></a></p>
+      <p><a data-campo="email-link" href="#"></a></p>
+    </div>
+
+    <div class="rodape__bloco">
+      <h2 class="rodape__titulo">Funcionamento</h2>
+      <ul class="rodape__horarios" data-funcionamento></ul>
+      <a class="botao botao--destaque rodape__botao" data-zap-simples href="#">Falar no WhatsApp</a>
+    </div>
+
+    <div class="rodape__bloco rodape__bloco--mapa">
+      <iframe data-mapa title="Mapa da localização da academia" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+  <p class="rodape__creditos">Site modelo. Conteúdo, valores e horários são fictícios.</p>
+</footer>
+
+<a class="zap-flutuante" data-zap-simples href="#contato" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="currentColor">
+    <path d="M12.04 2.02c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.33 4.96L2 22.06l5.3-1.39a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91a9.85 9.85 0 0 0-2.9-7.01 9.82 9.82 0 0 0-7.01-2.94Zm0 18.14a8.22 8.22 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.21 8.21 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.69 8.22-8.24 8.22Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.48-.4-.42-.55-.43h-.48c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.05s.88 2.38 1 2.54c.12.17 1.73 2.65 4.2 3.71.58.25 1.04.4 1.39.51.59.19 1.12.16 1.54.1.47-.07 1.47-.6 1.67-1.18.21-.59.21-1.09.15-1.19-.06-.11-.22-.17-.47-.29Z"/>
+  </svg>
+  <span>WhatsApp</span>
+</a>
+
+<script type="module" src="assets/js/principal.js"></script>
+</body>
+</html>
