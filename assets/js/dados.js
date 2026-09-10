@@ -130,8 +130,8 @@ export const ACADEMIA = {
     {
       nome: 'Cardio',
       descricao: 'Esteiras e bikes de frente para a janela. Ninguém treina olhando para a parede.',
-      imagem: '',
-      alt: '',
+      imagem: 'assets/img/zona-cardio.jpg',
+      alt: 'Fileira de esteiras e bicicletas voltadas para a janela com vista da cidade',
     },
     {
       nome: 'Studio',
@@ -142,14 +142,14 @@ export const ACADEMIA = {
     {
       nome: 'Funcional',
       descricao: 'Área aberta com cordas, caixas e kettlebells para treino em circuito.',
-      imagem: '',
-      alt: '',
+      imagem: 'assets/img/zona-funcional.jpg',
+      alt: 'Área de treino funcional com rack de argolas, kettlebells e cordas navais',
     },
     {
       nome: 'Vestiário',
       descricao: 'Armário com chave, chuveiro quente e secador. Dá para treinar antes do trabalho.',
-      imagem: '',
-      alt: '',
+      imagem: 'assets/img/zona-vestiario.jpg',
+      alt: 'Vestiário com armários de madeira escura, banco central e toalhas',
     },
   ],
 
