@@ -105,6 +105,11 @@ function desenharZonas(dados) {
     });
 
     if (zona.imagem) {
+      // O cartão começa mostrando o nome da zona e só troca pela foto
+      // quando ela carrega. Se a foto não estiver na pasta, fica o nome —
+      // nunca o ícone de imagem quebrada.
+      cartao.classList.add('zona--sem-imagem');
+
       const foto = criar('img', {
         classe: 'zona__imagem',
         src: zona.imagem,
@@ -112,12 +117,14 @@ function desenharZonas(dados) {
         loading: 'lazy',
         decoding: 'async',
       });
-      // Se a foto ainda não foi colocada na pasta, cai no bloco com o nome
-      // da zona em vez de mostrar o ícone de imagem quebrada.
-      foto.addEventListener('error', () => {
-        foto.remove();
-        cartao.classList.add('zona--sem-imagem');
+
+      foto.addEventListener('load', () => {
+        cartao.classList.remove('zona--sem-imagem');
       });
+      foto.addEventListener('error', () => {
+        foto.hidden = true;
+      });
+
       cartao.append(foto);
     }
 

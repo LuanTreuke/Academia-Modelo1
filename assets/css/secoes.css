@@ -25,9 +25,15 @@
   content: '';
   position: absolute;
   inset: 0;
+  /* três camadas: base, meio-tom sobre a área do texto, e lateral esquerda */
   background:
-    linear-gradient(to top, var(--cor-fundo) 2%, transparent 55%),
-    linear-gradient(to right, var(--cor-sombra-imagem) 10%, transparent 75%);
+    linear-gradient(
+      to top,
+      var(--cor-fundo) 3%,
+      rgba(8, 8, 9, 0.62) 26%,
+      transparent 62%
+    ),
+    linear-gradient(to right, var(--cor-sombra-imagem) 5%, transparent 70%);
 }
 
 .hero__interno {
@@ -642,7 +648,13 @@
   position: relative;
   width: 100%;
   padding: var(--e-3);
-  background: linear-gradient(to top, var(--cor-sombra-imagem) 30%, transparent);
+  /* forte o bastante para segurar o texto mesmo sobre foto clara */
+  background: linear-gradient(
+    to top,
+    rgba(6, 6, 7, 0.94) 10%,
+    rgba(6, 6, 7, 0.62) 48%,
+    transparent 100%
+  );
 }
 
 .zona__nome {
