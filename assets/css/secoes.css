@@ -593,35 +593,78 @@
   letter-spacing: 0.06em;
 }
 
+/* Coverflow montado por tour.js. Os cartões ficam empilhados no centro do
+   palco e cada um recebe posição, opacidade e z-index pelo JS. */
 .tour {
-  display: flex;
-  gap: var(--e-2);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  /* alinha o primeiro cartão com o texto das outras seções.
-     O scroll-padding é o que impede o snap de engolir essa margem. */
-  padding-inline: max(
-    clamp(1rem, 4vw, 2.5rem),
-    calc((100vw - var(--largura-max)) / 2 + 2.5rem)
-  );
-  scroll-padding-inline: max(
-    clamp(1rem, 4vw, 2.5rem),
-    calc((100vw - var(--largura-max)) / 2 + 2.5rem)
-  );
-  padding-bottom: var(--e-2);
-  scrollbar-width: thin;
+  --zona-largura: clamp(220px, 28vw, 340px);
+  --zona-altura: calc(var(--zona-largura) * 1.25);
+
+  position: relative;
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+  /* no celular os cartões laterais saem da tela; clip corta sem criar
+     rolagem */
+  overflow-x: clip;
+}
+
+.tour:focus-visible {
+  outline-offset: -3px;
+}
+
+/* A altura sai do tamanho do cartão, com folga, para nenhum cartão vazar
+   por baixo. E o isolation prende o z-index dos cartões aqui dentro: por
+   maior que seja, nunca passa por cima das setas e dos pontos. */
+.tour__palco {
+  position: relative;
+  isolation: isolate;
+  height: calc(var(--zona-altura) + var(--e-5));
+  perspective: 1600px;
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.tour--arrastando .tour__palco {
+  cursor: grabbing;
+}
+
+/* O deck fica no plano da frente do 3D. Sem pointer-events ele deixa o
+   clique passar para as zonas que recuam atrás dele. */
+.tour__deck {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
 }
 
 .zona {
-  position: relative;
-  flex: 0 0 min(74vw, 480px);
-  aspect-ratio: 3 / 4;
-  scroll-snap-align: start;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--zona-largura);
+  height: var(--zona-altura);
   background: var(--cor-superficie-alta);
   border: 1px solid var(--cor-linha);
+  border-radius: var(--raio);
   overflow: hidden;
   display: flex;
   align-items: flex-end;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7);
+  transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 0.6s ease, border-color 0.3s;
+  will-change: transform, opacity;
+  user-select: none;
+  pointer-events: auto;
+}
+
+.zona--ativa {
+  border-color: var(--cor-destaque);
+  box-shadow: 0 40px 80px -24px rgba(0, 0, 0, 0.85);
+}
+
+/* durante o arrasto o cartão segue o dedo, sem atraso */
+.tour--arrastando .zona {
+  transition: none;
 }
 
 .zona__imagem {
@@ -630,6 +673,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  pointer-events: none;
 }
 
 .zona--sem-imagem::before {
@@ -655,6 +699,15 @@
     rgba(6, 6, 7, 0.62) 48%,
     transparent 100%
   );
+  /* o texto só aparece na zona do centro */
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.zona--ativa .zona__texto {
+  opacity: 1;
+  transform: none;
 }
 
 .zona__nome {
@@ -668,10 +721,89 @@
   max-width: 34ch;
 }
 
-@media (min-width: 900px) {
-  .zona {
-    aspect-ratio: 4 / 5;
-  }
+/* Controles: vêm depois do palco e têm camada própria acima dele */
+.tour__controles {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--e-3);
+  margin-top: var(--e-2);
+}
+
+.tour__seta {
+  display: grid;
+  place-items: center;
+  width: 2.875rem;
+  height: 2.875rem;
+  border: 1px solid var(--cor-linha);
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.tour__seta:hover {
+  border-color: var(--cor-destaque);
+  color: var(--cor-destaque);
+  transform: translateY(-2px);
+}
+
+.tour__seta:active {
+  transform: scale(0.94);
+}
+
+.tour__seta svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tour__pontos {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* O botão é maior que a bolinha, para o dedo acertar no celular */
+.tour__ponto {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.tour__ponto::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--cor-linha);
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.tour__ponto:hover::before {
+  background: var(--cor-texto-suave);
+}
+
+.tour__ponto[aria-current='true']::before {
+  background: var(--cor-destaque);
+  transform: scale(1.5);
+}
+
+/* Anuncia a área nova para leitor de tela, sem aparecer na tela */
+.tour__status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 /* ------------------------------------------------------------- 6. PLANOS */

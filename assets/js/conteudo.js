@@ -1,6 +1,7 @@
 /**
  * Preenche tudo que vem direto de dados.js: identidade, contato, planos,
- * zonas da estrutura, depoimentos e rodapé.
+ * depoimentos e rodapé. As zonas da estrutura, que são interativas,
+ * ficam em tour.js.
  */
 import { criar, linkZap, moeda } from './util.js';
 
@@ -94,51 +95,6 @@ function desenharPlanos(dados) {
   raiz.hidden = false;
 }
 
-function desenharZonas(dados) {
-  const raiz = document.querySelector('[data-tour]');
-  if (!raiz) return;
-
-  for (const zona of dados.zonas) {
-    const cartao = criar('article', {
-      classe: `zona${zona.imagem ? '' : ' zona--sem-imagem'}`,
-      'data-nome': zona.nome,
-    });
-
-    if (zona.imagem) {
-      // O cartão começa mostrando o nome da zona e só troca pela foto
-      // quando ela carrega. Se a foto não estiver na pasta, fica o nome —
-      // nunca o ícone de imagem quebrada.
-      cartao.classList.add('zona--sem-imagem');
-
-      const foto = criar('img', {
-        classe: 'zona__imagem',
-        src: zona.imagem,
-        alt: zona.alt || `Área de ${zona.nome}`,
-        loading: 'lazy',
-        decoding: 'async',
-      });
-
-      foto.addEventListener('load', () => {
-        cartao.classList.remove('zona--sem-imagem');
-      });
-      foto.addEventListener('error', () => {
-        foto.hidden = true;
-      });
-
-      cartao.append(foto);
-    }
-
-    cartao.append(
-      criar('div', { classe: 'zona__texto' }, [
-        criar('h3', { classe: 'zona__nome', texto: zona.nome }),
-        criar('p', { classe: 'zona__descricao', texto: zona.descricao }),
-      ]),
-    );
-
-    raiz.append(cartao);
-  }
-}
-
 function desenharDepoimentos(dados) {
   const raiz = document.querySelector('[data-depoimentos]');
   if (!raiz) return;
@@ -162,7 +118,6 @@ export function iniciar(dados) {
   aplicarIdentidade(dados);
   desenharRodape(dados);
   desenharPlanos(dados);
-  desenharZonas(dados);
   desenharDepoimentos(dados);
 
   /** Marca na tabela de planos o que o quiz recomendou. */

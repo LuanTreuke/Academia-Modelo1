@@ -42,7 +42,7 @@ o objeto `ACADEMIA`:
 | `planos` | Nome, preço, o que resolve e o que inclui |
 | `aulas` | Grade da semana (`dia`: 0 = domingo, 6 = sábado) |
 | `lotacao` | O mapa de movimento — veja abaixo |
-| `zonas` | As áreas do tour de estrutura |
+| `zonas` | As áreas do tour de estrutura, mostradas num coverflow 3D |
 | `depoimentos` | Prova social |
 
 Fora daí, só existe um trecho de conteúdo escrito direto no HTML: o
@@ -97,7 +97,8 @@ assets/
     secoes.css    estilo de cada seção
   js/
     dados.js      ← o arquivo do cliente
-    conteudo.js   preenche identidade, planos, zonas, depoimentos
+    conteudo.js   preenche identidade, planos, depoimentos
+    tour.js       coverflow 3D das zonas da estrutura
     hero-vivo.js  hora, próxima aula e movimento no topo
     quiz.js       montador de plano
     lotacao.js    mapa de movimento
